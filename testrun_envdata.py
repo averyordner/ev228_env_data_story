@@ -6,15 +6,15 @@ import pandas as pd
 import numpy as np
 import datetime as dt
 
-#import fun_plots as fp
-#import fun_import as fi
+import fun_plots as fp
+import fun_imports as fi
 
 file_path="/Users/morganharrison/Downloads/ev228_data/"
 selected_name= 'Selected_Station_Observations_Daily_Xtab_202510261705.csv'
 out_p= '/Users/morganharrison/Downloads/ev228_data/graphs/'
 out_fn= '1_envdata_story.png'
 df_csf = pd.read_csv(file_path + selected_name)
-print(df_csf.columns)
+#print(df_csf.columns)
 
 def loop_dates(df):
     df['year']= None
@@ -27,7 +27,7 @@ def loop_dates(df):
     print(df)
     return df
 good_dates= loop_dates(df_csf)
-print(good_dates)
+#print(good_dates)
 
 column_names=['Year', 'Mean Discharge']
 annual_mean=pd.DataFrame(columns=column_names)
@@ -36,10 +36,20 @@ for m in range(2000,2026):
     print(m, work)
     new_row=pd.DataFrame({"Year": [m], "Mean Discharge": [work]})
     annual_mean=pd.concat([annual_mean, new_row], ignore_index=True)
-print(annual_mean)
+#print(annual_mean)
 
-fp.timeseries(good_dates, in_x='''enter''', out_path=out_p, out_name=out_fn)
-
+data={'X_values':annual_mean['Year'],
+      'Y_values':annual_mean['Mean Discharge']}
+df_graph=pd.DataFrame(data)
+x=df_graph['X_values']
+y=df_graph['Y_values']
+plt.plot(x, y, linewidth=2)
+plt.xlabel('Years')
+plt.xlim(2000, 2025)
+plt.ylabel('Stream discharge in cfs')
+plt.title('South Platte River near Lake George, CO, 2000-2025')
+plt.savefig(out_p + out_fn, dpi=400)
+plt.show()
 
 '''The long way, manually calculating annual DISCHRG Value, 
 incomplete but alternative to transfer daily data into annual
