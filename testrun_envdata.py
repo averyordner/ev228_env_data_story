@@ -6,8 +6,8 @@ import pandas as pd
 import numpy as np
 import datetime as dt
 
-import fun_plots as fp
-import fun_import as fi
+#import fun_plots as fp
+#import fun_import as fi
 
 file_path="/Users/morganharrison/Downloads/ev228_data/"
 selected_name= 'Selected_Station_Observations_Daily_Xtab_202510261705.csv'
@@ -29,14 +29,19 @@ def loop_dates(df):
 good_dates= loop_dates(df_csf)
 print(good_dates)
 
-#fp.timeseries(good_dates, in_x='''enter''', out_path=out_p, out_name=out_fn)
+column_names=['Year', 'Mean Discharge']
+annual_mean=pd.DataFrame(columns=column_names)
+for m in range(2000,2026):
+    work=good_dates.loc[good_dates['year']==m, 'DISCHRG Value'].mean()
+    print(m, work)
+    new_row=pd.DataFrame({"Year": [m], "Mean Discharge": [work]})
+    annual_mean=pd.concat([annual_mean, new_row], ignore_index=True)
+print(annual_mean)
 
-# dates= pd.to_datetime(df['Date Time'])
-# print(dates)
-# df['Year']=df['Date Time'].dt.year
-# print(df['Year'])
+fp.timeseries(good_dates, in_x='''enter''', out_path=out_p, out_name=out_fn)
 
-'''The long way, manually calculating annual DISHRG Value, 
+
+'''The long way, manually calculating annual DISCHRG Value, 
 incomplete but alternative to transfer daily data into annual
 year_0= df.iloc[:364]['DISCHRG Value'].mean()
 year_1= df.iloc[365:729]['DISCHRG Value'].mean()
