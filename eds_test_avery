@@ -1,0 +1,12 @@
+import numpy as np
+import pandas as pd
+import KRDU_temp_import as kti
+
+path = 'C:\\Users\\avery\\Downloads\\ev228_data\\'
+fn = 'Selected_Station_Observations_Daily_Xtab_202510261705.csv'
+
+df = pd.read_csv(path + fn)
+print(df)
+
+column = 'Date' and 'DISCHRG Value'
+kti.fun_extract_column(path, fn, column)
