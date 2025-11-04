@@ -6,13 +6,10 @@ import pandas as pd
 import numpy as np
 import datetime as dt
 
-import fun_plots as fp
-import fun_imports as fi
-
 file_path="/Users/morganharrison/Downloads/ev228_data/"
 selected_name= 'Selected_Station_Observations_Daily_Xtab_202510261705.csv'
 out_p= '/Users/morganharrison/Downloads/ev228_data/graphs/'
-out_fn= '1_envdata_story.png'
+out_fn= '4_envdata_story.png'
 df_csf = pd.read_csv(file_path + selected_name)
 #print(df_csf.columns)
 
@@ -43,6 +40,13 @@ data={'X_values':annual_mean['Year'],
 df_graph=pd.DataFrame(data)
 x=df_graph['X_values']
 y=df_graph['Y_values']
+
+#fig= plt.subplots()
+#ax=fig.add_subplot(1, 1, 1)
+#ax.set_facecolor('lightblue')
+fig=plt.figure()
+fig.patch.set_facecolor('darksalmon')
+
 plt.plot(x, y, linewidth=2)
 plt.xlabel('Years')
 plt.xlim(2000, 2025)
@@ -50,6 +54,7 @@ plt.ylabel('Stream discharge in cfs')
 plt.title('South Platte River near Lake George, CO, 2000-2025')
 plt.savefig(out_p + out_fn, dpi=400)
 plt.show()
+
 
 '''The long way, manually calculating annual DISCHRG Value, 
 incomplete but alternative to transfer daily data into annual
