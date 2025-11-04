@@ -9,7 +9,7 @@ import datetime as dt
 file_path="/Users/morganharrison/Downloads/ev228_data/"
 selected_name= 'Selected_Station_Observations_Daily_Xtab_202510261705.csv'
 out_p= '/Users/morganharrison/Downloads/ev228_data/graphs/'
-out_fn= '4_envdata_story.png'
+out_fn= '5_envdata_story.png'
 df_csf = pd.read_csv(file_path + selected_name)
 #print(df_csf.columns)
 
@@ -41,11 +41,10 @@ df_graph=pd.DataFrame(data)
 x=df_graph['X_values']
 y=df_graph['Y_values']
 
-#fig= plt.subplots()
-#ax=fig.add_subplot(1, 1, 1)
-#ax.set_facecolor('lightblue')
 fig=plt.figure()
-fig.patch.set_facecolor('darksalmon')
+fig.patch.set_facecolor('navajowhite')
+ax=fig.add_subplot(1, 1, 1)
+ax.set_facecolor('blanchedalmond')
 
 plt.plot(x, y, linewidth=2)
 plt.xlabel('Years')
