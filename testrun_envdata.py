@@ -9,44 +9,52 @@ import datetime as dt
 file_path="/Users/morganharrison/Downloads/ev228_data/"
 selected_name= 'Selected_Station_Observations_Daily_Xtab_202510261705.csv'
 out_p= '/Users/morganharrison/Downloads/ev228_data/graphs/'
-out_fn= '5_envdata_story.png'
+out_fn= '6_envdata_story.png'
 df_csf = pd.read_csv(file_path + selected_name)
 #print(df_csf.columns)
 
+'''loop_dates gets rid of extra charcters that python cannot read, and returns just good_dates'''
 def loop_dates(df):
     df['year']= None
+    df['month']= None
     for a in range(9379):
         yr = df.iloc[a, 1][2:12]
         date = pd.to_datetime(yr)
         df.iloc[a, 1] = date
         year=date.year
+        month=date.month
         df.iloc[a, 8]=year
+        df.iloc[a, 9]=month
     print(df)
     return df
 good_dates= loop_dates(df_csf)
-#print(good_dates)
+print(good_dates)
 
-column_names=['Year', 'Mean Discharge']
+'''this loop adds additional columns without the extra charecters of year and month'''
+column_names=['Month', 'Year', 'Mean Discharge']
 annual_mean=pd.DataFrame(columns=column_names)
 for m in range(2000,2026):
-    work=good_dates.loc[good_dates['year']==m, 'DISCHRG Value'].mean()
-    print(m, work)
-    new_row=pd.DataFrame({"Year": [m], "Mean Discharge": [work]})
-    annual_mean=pd.concat([annual_mean, new_row], ignore_index=True)
-#print(annual_mean)
+    for l in range(1,13):
+        work=good_dates.loc[(good_dates['year']==m) & (good_dates['month']==l), 'DISCHRG Value'].mean()
+        print(m, l, work)
+        new_row=pd.DataFrame({"Month":[l], "Year": [m], "Mean Discharge": [work]})
+        annual_mean=pd.concat([annual_mean, new_row], ignore_index=True)
+print(annual_mean)
 
+'''graphing the data with new columns'''
 data={'X_values':annual_mean['Year'],
       'Y_values':annual_mean['Mean Discharge']}
 df_graph=pd.DataFrame(data)
 x=df_graph['X_values']
 y=df_graph['Y_values']
 
+'''adding color to the graph'''
 fig=plt.figure()
-fig.patch.set_facecolor('navajowhite')
+fig.patch.set_facecolor('steelblue')
 ax=fig.add_subplot(1, 1, 1)
-ax.set_facecolor('blanchedalmond')
+ax.set_facecolor('powderblue')
 
-plt.plot(x, y, linewidth=2)
+plt.plot(x, y, linewidth=3)
 plt.xlabel('Years')
 plt.xlim(2000, 2025)
 plt.ylabel('Stream discharge in cfs')
