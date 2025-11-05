@@ -5,5 +5,10 @@ For this project, we focused on South Platte River stream gauge data from 2000-2
 
 In order to generate figures for this project, we imported a stream gauge csv dataset into python and ran functions until we could plot the data using matplotlib (see pushed code). 
 
+Code Index:
+We first imported matplotlib.pyplot, pandas, numpy, and datetime in order to plot, calculate statistics, and convert date formats.
+- loop_dates: a for loop that removes unreadable characters from python and formats columns for year, month, and mean value
+- good_dates: uses readable dates from loop_dates from the given import of data
+
 Generative AI Statement: We used generative AI as a starting point for helping us specify our x and y axis values because they were giving us trouble.
 
