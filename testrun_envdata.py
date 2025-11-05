@@ -9,7 +9,7 @@ import datetime as dt
 file_path="/Users/morganharrison/Downloads/ev228_data/"
 selected_name= 'Selected_Station_Observations_Daily_Xtab_202510261705.csv'
 out_p= '/Users/morganharrison/Downloads/ev228_data/graphs/'
-out_fn= '6_envdata_story.png'
+out_fn= '10_envdata_story.png'
 df_csf = pd.read_csv(file_path + selected_name)
 #print(df_csf.columns)
 
@@ -45,18 +45,21 @@ print(annual_mean)
 data={'X_values':annual_mean['Year'],
       'Y_values':annual_mean['Mean Discharge']}
 df_graph=pd.DataFrame(data)
-x=df_graph['X_values']
+x=range(0,312)
 y=df_graph['Y_values']
+print(x)
+print(y)
 
 '''adding color to the graph'''
 fig=plt.figure()
-fig.patch.set_facecolor('steelblue')
+fig.patch.set_facecolor('powderblue')
 ax=fig.add_subplot(1, 1, 1)
-ax.set_facecolor('powderblue')
+ax.set_facecolor('aliceblue')
 
-plt.plot(x, y, linewidth=3)
-plt.xlabel('Years')
-plt.xlim(2000, 2025)
+plt.xticks(ticks=[0, 60, 120, 180, 240, 300], labels=[2000, 2005, 2010, 2015, 2020, 2025], rotation=20)
+plt.plot(x, y, linewidth=2)
+plt.xlabel('Monthly Averages over 25 Years')
+plt.xlim(0, 311)
 plt.ylabel('Stream discharge in cfs')
 plt.title('South Platte River near Lake George, CO, 2000-2025')
 plt.savefig(out_p + out_fn, dpi=400)

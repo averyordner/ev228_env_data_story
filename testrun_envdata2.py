@@ -11,3 +11,5 @@ out_fn= '1_extra_envstory.png'
 gdf=gpd.read_file(file_path + historic_name)
 print(gdf.columns)
 
+gdf.plot("")
+
