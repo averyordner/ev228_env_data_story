@@ -1,3 +1,9 @@
 # ev228_env_data_story
-repository for avery and morgan's environmental data story project
-Hi this is an edit
+Repository for Avery and Morgan's Environmental Data Story Project
+
+For this project, we focused on South Platte River stream gauge data from 2000-2025 (this includes the Hayman Fire of 2002 and the flooding of 2013). We then took averages by month in order to see how stream discharge has changed since the Hayman Fire of 2002. We expected to see a large spike in discharge following the floods of 2013, so we compared this to discharge value to surrounding years. 
+
+In order to generate figures for this project, we imported a stream gauge csv dataset into python and ran functions until we could plot the data using matplotlib (see pushed code). 
+
+Generative AI Statement: We used generative AI as a starting point for helping us specify our x and y axis values because they were giving us trouble.
+
