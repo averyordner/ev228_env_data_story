@@ -15,5 +15,6 @@ We first imported matplotlib.pyplot, pandas, numpy, and datetime in order to plo
 - fig, ax: defined to plot and set color
 - ticks: manually defined x axis tick values for plotting 
 
+# Generative AI
 Generative AI Statement: We used generative AI as a starting point for helping us specify our x and y axis values because they were giving us trouble.
 
